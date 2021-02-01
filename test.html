@@ -7,7 +7,7 @@
 </head>
 <body>
     <button
-    style="outline: none"
+    style="outline: none;border: none;background: none;"
     onclick="
     localStorage.setItem('linebot-lp', JSON.stringify({
     postData: {
@@ -18,16 +18,16 @@
         city_list: '港区,渋谷区'
       },
     },
-    redirectUrl: 'https://www.estate-tech.co.jp/',
+    redirectUrl: 'https://ishibashiet.github.io/line-login-lp/test.html',
     }));
     const CLIENT_ID = '1655471296';
-    const REDIRECT_PAGE_PATH = 'http://localhost:3000/redirect.html';
+    const REDIRECT_PAGE_PATH = 'https://ishibashiet.github.io/line-login-lp/redirect.html';
     
     setTimeout(() => {
     location.href = `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=https://wafull.linelogin.dr-asset.jp/?redirect_page=${REDIRECT_PAGE_PATH}&state=randomtoken&scope=profile%20openid&nonce=09876xyz&bot_prompt=aggressive&prompt=consent`;
     }, 0);"
   >
-    <img src="/btn_login.png" alt="LINEログイン" height="36" border="0" />
+    <img src="./btn_login.png" alt="LINEログイン" height="36" border="0" />
   </button>    
 </body>
 </html>

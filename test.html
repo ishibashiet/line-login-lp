@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button
+    style="outline: none"
+    onclick="
+    localStorage.setItem('linebot-lp', JSON.stringify({
+    postData: {
+      condition_name: '子育てに関する条件',
+      condition_info: {
+        purpose: 'home',
+        construction_year_from: 1999,
+        city_list: '港区,渋谷区'
+      },
+    },
+    redirectUrl: 'https://www.estate-tech.co.jp/',
+    }));
+    const CLIENT_ID = '1655471296';
+    const REDIRECT_PAGE_PATH = 'http://localhost:3000/redirect.html';
+    
+    setTimeout(() => {
+    location.href = `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=https://wafull.linelogin.dr-asset.jp/?redirect_page=${REDIRECT_PAGE_PATH}&state=randomtoken&scope=profile%20openid&nonce=09876xyz&bot_prompt=aggressive&prompt=consent`;
+    }, 0);"
+  >
+    <img src="/btn_login.png" alt="LINEログイン" height="36" border="0" />
+  </button>    
+</body>
+</html>

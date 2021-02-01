@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <title></title>
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script type="text/javascript">
+    // POST先
+    const POST_URL = "https://wafull.linereco.dr-asset.jp/from-lp"
+    // ローカルストレージ用キー
+    const STORAGE_KEY = "linebot-lp";
+    // クエリパラメータでのLINEIDのキー
+    const LINE_ID_KEY = "line_id";
+
+    // LineIdをクエリパラメータから取得
+    function getLineId() {
+      let lineId = "";
+      location.search
+        .replace("?", "")
+        .split("&")
+        .forEach((param) => {
+          if (param.split("=")[0] == LINE_ID_KEY) {
+            lineId = param.split("=")[1];
+            return;
+          }
+        });
+      return lineId;
+    };
+
+    // LINEへのメッセージ送信
+    async function callLineBotLambda(lineId) {
+      const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      try {
+        await axios.post(POST_URL, {
+          ...data.postData,
+          user_id: lineId,
+        });
+      } catch (e) {
+        console.log(e);
+      } finally {
+        location.href = data.redirectUrl;
+      }
+    }
+
+    const lineId = getLineId();
+    if (lineId) {
+      this.callLineBotLambda(lineId);
+    } else {
+      location.href = JSON.parse(localStorage.getItem(STORAGE_KEY)).redirectUrl;
+    }
+  </script>
+</body>
+
+</html> 
